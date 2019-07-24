@@ -1,0 +1,35 @@
+apiVersion: apps/v1beta2
+kind: Deployment
+metadata:
+  name: gearbus
+spec:
+  selector:
+    matchLabels:
+      app: gearbus
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: gearbus
+    spec:
+      restartPolicy: Always
+      containers:
+      - name: gearbus
+        image: interplanaria/bitbus
+        #command: ["/bin/sh"] # <- for testing
+        command: ["/bin/sh"]
+        args: ["-c","sh /mnt/run.sh"]
+        ports:
+        - containerPort: 3007
+          protocol: TCP
+          name: explorer
+        volumeMounts:
+        - mountPath: /mnt
+          name: test-volume
+      volumes:
+      - name: test-volume
+        hostPath:
+        # directory location on host
+          path: /home/glenn.wolfe/gear-bus
+        # this field is optional
+          type: Directory
