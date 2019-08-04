@@ -9,7 +9,7 @@ Kubernetes deployment charts and instructions.
 
 ### Quickstart
 
-####Startup:
+#### Startup:
 ```
 helm package gear-sv --version <semver>
 helm upgrade --install gear-sv gear-sv-<semver> --namespace <default>
