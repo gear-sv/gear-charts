@@ -15,7 +15,7 @@ spec:
       restartPolicy: Always
       containers:
       - name: gearpla
-        image: gwolf3/gear-pla:demo
+        image: gwolf3/gear-pla:0.2
         #command: ["/bin/sh"] # <- for testing
         command: ["/bin/sh"]
         # args: ["-c","sh /mnt/run.sh"]
@@ -23,7 +23,7 @@ spec:
         ports:
         - containerPort: 3010
           protocol: TCP
-          name: stateDB
+          name: state
         volumeMounts:
         - mountPath: /gear-bus
           name: test-volume
