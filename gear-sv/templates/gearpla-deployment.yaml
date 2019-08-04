@@ -1,0 +1,36 @@
+apiVersion: apps/v1beta2
+kind: Deployment
+metadata:
+  name: gearpla
+spec:
+  selector:
+    matchLabels:
+      app: gearpla
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: gearpla
+    spec:
+      restartPolicy: Always
+      containers:
+      - name: gearpla
+        image: gwolf3/gear-pla:demo
+        #command: ["/bin/sh"] # <- for testing
+        command: ["/bin/sh"]
+        # args: ["-c","sh /mnt/run.sh"]
+        args: ["-c","npm run start"]
+        ports:
+        - containerPort: 3010
+          protocol: TCP
+          name: stateDB
+        volumeMounts:
+        - mountPath: /gear-bus
+          name: test-volume
+      volumes:
+      - name: test-volume
+        hostPath:
+        # directory location on host
+          path: /mnt
+        # this field is optional
+          type: Directory
