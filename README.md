@@ -25,7 +25,7 @@ No:
 2) Navigate to 127.0.0.1:7070 in your browser.
 
 Yes:
-1) Navigate to "<node-external-ip>":30010 in your browser
+1) Navigate to node-external-ip:30010 in your browser
 
 
 #### Running Query:
