@@ -1,0 +1,44 @@
+apiVersion: apps/v1beta2
+kind: Deployment
+metadata:
+  name: emcc-compiler
+spec:
+  selector:
+    matchLabels:
+      app: emcc-compiler
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: emcc-compiler
+    spec:
+      restartPolicy: Always
+      containers:
+      - name: emcc-compiler
+        image: gwolf3/gear-compiler:v2
+        command: ["/usr/local/bin/npm","run","start"]
+        ports:
+        - containerPort: 7050
+          protcol: TCP
+          name: listener
+
+        # add health checks (for load balancing)
+        livenessProbe:
+          httpGet:
+            path: /healthz
+            port: 7050
+            scheme: HTTP
+          successThreshold: 1
+          failureThreshold: 6
+          periodSeconds: 10
+          timeoutSeconds: 1
+        readinessProbe:
+          httpGet:
+            path: /healthz
+            port: 7050
+            scheme: HTTP
+          successThreshold: 1
+          failureThreshold: 6
+          periodSeconds: 10
+          timeoutSeconds: 1
+
