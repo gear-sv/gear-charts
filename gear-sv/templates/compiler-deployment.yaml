@@ -15,7 +15,7 @@ spec:
       restartPolicy: Always
       containers:
       - name: emcc-compiler
-        image: gwolf3/gear-compiler:v2
+        image: gwolf3/gear-compiler:v6
         command: ["/usr/local/bin/npm","run","start"]
         ports:
         - containerPort: 7050

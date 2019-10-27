@@ -3,10 +3,11 @@ kind: Service
 metadata:
   name: emcc-compiler-service
 spec:
-  type: ClusterIP
+  type: NodePort
   selector:
     app: emcc-compiler
   ports:
   - protocol: TCP
     port: 7050
+    nodePort: 30750
     targetPort: listener
